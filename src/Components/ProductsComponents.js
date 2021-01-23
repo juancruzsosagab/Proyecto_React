@@ -1,20 +1,37 @@
-import React from "react"
+import React,{useState} from "react";
 import {Link} from 'react-router-dom'
 import { Card,Button } from 'react-bootstrap';
 import {Venta} from '../Services/SalesServices'
 import NetContext from "../Context/NetContext";
+
+
 function ProductsComponents({producto,verDetalle}) {
+    const [loading,setLoading] = useState(false);
     
+
+    const handleClickDetalle = async (e)=>{
+        setLoading(true);
+        console.log("hola"+loading)
+    }
     const handleClick = async (e)=>{
-        e.preventDefault();
+        
         let result = await Venta({
-            "products":[producto._id]
+            "product_id": producto._id,
+            "payment": { 
+            "method": "contado",                 
+            "status": "pagado",                  
+            }
+
         })
-        console.log(result)
-        if(result["data"]["mp"]){
-            window.open(result["data"]["mp"]["body"]["init_point"],'_blank');
+        
+        if(!result){
+            e.preventDefault();
+            alert("Tu compra no ha podido ser efectuada")
         }
     }
+   
+
+      
     return(
         <NetContext.Consumer>
             {context=>(
@@ -24,13 +41,18 @@ function ProductsComponents({producto,verDetalle}) {
                         <Card.Title>{producto.name}</Card.Title>
                         <Card.Text>
                         {producto.price_currency}
+                        
                         </Card.Text>
                         {
                             verDetalle &&
-                            <Link to={"/productos/"+producto.id}><Button variant="primary">Ver Detalle</Button></Link>
+                            <Link to={"/productos/"+producto.id}><Button onClick={handleClickDetalle} variant="primary">Ver Detalle</Button></Link>
+                            
                         }
                         {context.login && 
-                            <Button variant="primary" onClick={handleClick}>Comprar</Button>
+                           
+                           <Link to={"/successful/"}><Button variant="primary" onClick={handleClick}>Comprar</Button></Link>
+                           
+                           
                         }
                         
                     </Card.Body>

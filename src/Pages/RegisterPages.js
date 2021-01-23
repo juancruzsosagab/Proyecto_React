@@ -34,7 +34,7 @@ function RegisterPages(){
             }else{
                 setAlert({variant:"danger",text:"Ha ocurrido un error"})
             }
-          //Acá tira un 500 y no devuelve la respuesta de express, revisar  
+          //Acá tira un 500 y no devuelve la respuesta de express, en clase no pudimos ver como tratarlo
         
         },
         error=>{
