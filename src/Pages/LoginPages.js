@@ -27,6 +27,7 @@ function LoginPages(){
             console.log("Data",data)
             if(data.data.token){
                 context.loginUser(data.data.token)
+                localStorage.setItem("userWeb",data.data.userWeb);
                 setAlert({variant:"success",text:"Bienvenido/a"})
                 history.push("/")
             }else{

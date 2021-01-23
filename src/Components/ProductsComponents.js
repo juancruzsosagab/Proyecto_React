@@ -14,9 +14,11 @@ function ProductsComponents({producto,verDetalle}) {
         console.log("hola"+loading)
     }
     const handleClick = async (e)=>{
-        
+        const userId = localStorage.getItem("userWeb");
+        console.log("userWeb",userId);
         let result = await Venta({
             "product_id": producto._id,
+            "usuario_id":userId,
             "payment": { 
             "method": "contado",                 
             "status": "pagado",                  
