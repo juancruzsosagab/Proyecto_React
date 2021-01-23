@@ -10,7 +10,7 @@ function MenuComponents(props){
         {
           context=>(
             
-            <Navbar bg="light" expand="lg" style={{marginBottom:'10px'}}>
+            <Navbar bg="dark" variant="dark" expand="lg" style={{marginBottom:'10px'}}>
               <Navbar.Brand href="#home">TP FINAL UTN</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
@@ -29,7 +29,6 @@ function MenuComponents(props){
                       <>
                       <OptionComponents key="registro" option={{label:"Registro",path:"/registro"}} />
                       <OptionComponents key="login" option={{label:"Login",path:"/login"}} />
-                      <OptionComponents key="nosotros" option={{label:"Nosotros",path:"/Nosotros"}} />
                       </>
                     }
                   </Nav>
